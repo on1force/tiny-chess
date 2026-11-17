@@ -6,6 +6,14 @@
 
 A chess engine in under 4 KB of Python: alpha-beta search with quiescence, a transposition table and null-move pruning, on a 10x12 board that turns around after every move. It searches to a fixed node budget, never a clock, so the same position always gets the same move.
 
+## Why main.py looks garbled
+
+It is packed: two lines of Python around an lzma-compressed copy of the readable source, so the whole engine fits the bounty's 4,096-byte cap. GitHub shows the compressed bytes as random characters. To print the source:
+
+```sh
+python3 -c "import ast,lzma;s=open('main.py',encoding='l1').read();print(lzma.decompress(ast.literal_eval(s.split('decompress(')[1].rsplit('.encode',1)[0]).encode('l1')).decode())"
+```
+
 ## Run it
 
 ```sh
